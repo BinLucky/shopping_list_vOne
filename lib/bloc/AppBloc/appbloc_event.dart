@@ -1,4 +1,19 @@
 part of 'appbloc_bloc.dart';
 
 @immutable
-abstract class AppblocEvent {}
+abstract class AppblocEvent extends Equatable {}
+
+class LogOutRequest extends AppblocEvent {
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
+}
+
+class UserStatusChanged extends AppblocEvent {
+  UserStatusChanged(this.user);
+  final User user;
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => throw UnimplementedError();
+}

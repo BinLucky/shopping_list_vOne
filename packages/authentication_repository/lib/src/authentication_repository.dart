@@ -59,6 +59,12 @@ class AuthenticationRepository {
     } catch (e) {}
     ;
   }
+
+  Future<void> logOut() async {
+    try {
+      await Future.wait([_firebaseAuth.signOut(), _googleSignIn.signOut()]);
+    } catch (_) {}
+  }
 }
 
 extension on firebase_auth.User {

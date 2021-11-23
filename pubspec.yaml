@@ -42,8 +42,8 @@ dependencies:
     version: ^0.0.0
 
 dev_dependencies:
-  #authentication_repository:
-  #  path: packages/authentication_repository
+  authentication_repository:
+    path: packages/authentication_repository
   bloc: ^8.0.0
   equatable: ^2.0.3
   flow_builder: ^0.0.4
