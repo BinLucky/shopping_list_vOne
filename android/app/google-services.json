@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "72862859729",
+    "project_id": "shopping-list-vone",
+    "storage_bucket": "shopping-list-vone.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:72862859729:android:a79f4c6fa483b0007be0f0",
+        "android_client_info": {
+          "package_name": "com.example.shopping_list_vone"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "72862859729-9br5fjtkqm86u4i5cskn9jucu8prnb69.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shopping_list_vone",
+            "certificate_hash": "2096c7ac210898caf17c8a20d46c51218a41080a"
+          }
+        },
+        {
+          "client_id": "72862859729-df149fkp72bnf4hlk8opa8t8q88vtdsb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVswLsZLJAm256nr9fUY_CDG7jNHYthXI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "72862859729-df149fkp72bnf4hlk8opa8t8q88vtdsb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
