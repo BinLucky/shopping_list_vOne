@@ -191,6 +191,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "9.2.0"
+  form_validators:
+    dependency: "direct dev"
+    description:
+      path: "packages/form_validators"
+      relative: true
+    source: path
+    version: "1.0.0+1"
   formz:
     dependency: "direct main"
     description:

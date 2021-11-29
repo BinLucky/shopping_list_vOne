@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_list_vone/cubit/login_cubit.dart';
 import 'package:sign_button/sign_button.dart';
 
 class LoginView extends StatelessWidget {
