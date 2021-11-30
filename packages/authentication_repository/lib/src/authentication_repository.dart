@@ -65,6 +65,14 @@ class AuthenticationRepository {
       await Future.wait([_firebaseAuth.signOut(), _googleSignIn.signOut()]);
     } catch (_) {}
   }
+
+  Future<void> logInWithEmailAndPassword(
+      {required String email, required String password}) async {
+    try {
+      await _firebaseAuth.signInWithEmailAndPassword(
+          email: email, password: password);
+    } catch (_) {}
+  }
 }
 
 extension on firebase_auth.User {
