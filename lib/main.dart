@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:authentication_repository/authentication_repository.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  final authenticationRepository = AuthenticationRepository();
+  await authenticationRepository.user.first;
+  BlocOver
   runApp(const MyApp());
 }
 
@@ -16,13 +23,5 @@ class MyApp extends StatelessWidget {
       ),
       home: MyHomePage(),
     );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
   }
 }

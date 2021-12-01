@@ -30,12 +30,22 @@ class LoginView extends StatelessWidget {
               const SizedBox(height: 8),
               _passwordInput(),
               const SizedBox(height: 8),
-              _loginInput()
+              _loginInput(),
+              const SizedBox(height: 8),
+              _socialGroup()
             ],
           ),
         ),
       ),
     );
+  }
+}
+
+class _socialGroup extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return Column(children: [_loginWithGoogle()]);
   }
 }
 
@@ -79,12 +89,30 @@ class _loginInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return ElevatedButton(
-      child: Text("Login"),
-      style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(Colors.brown.shade300),
-          fixedSize: MaterialStateProperty.all(Size(250, 50))),
-      onPressed: () {},
+    return BlocBuilder<LoginCubit, LoginState>(
+        buildWhen: (previus, current) => previus != current,
+        builder: (context, state) => state.status.isSubmissionInProgress
+            ? CircularProgressIndicator()
+            : ElevatedButton(
+                child: Text("Login"),
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.brown.shade300),
+                    fixedSize: MaterialStateProperty.all(Size(250, 50))),
+                onPressed: state.status.isValidated
+                    ? () => context.read<LoginCubit>().logInWithCredentials()
+                    : null,
+              ));
+  }
+}
+
+class _loginWithGoogle extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return SignInButton.mini(
+      buttonType: ButtonType.google,
+      onPressed: () => context.read<LoginCubit>().logInWithGoogle(),
     );
   }
 }
