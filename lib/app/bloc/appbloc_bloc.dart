@@ -9,8 +9,8 @@ import 'package:flutter/foundation.dart';
 part 'appbloc_event.dart';
 part 'appbloc_state.dart';
 
-class AppblocBloc extends Bloc<AppblocEvent, AppblocState> {
-  AppblocBloc({
+class AppBloc extends Bloc<AppblocEvent, AppblocState> {
+  AppBloc({
     required AuthenticationRepository authenticationRepository,
   })  : _authenticationRepository = authenticationRepository,
         super(authenticationRepository.currentUser.isNotEmpty
