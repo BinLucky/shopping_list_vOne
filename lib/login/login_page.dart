@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 //import 'package:provider/src/provider.dart';
-import 'package:shopping_list_vone/cubit/login_cubit.dart';
+import 'cubit/login_cubit.dart';
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shopping_list_vone/pages/views/login_view.dart';
+import 'package:shopping_list_vone/login/view/login_view.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);

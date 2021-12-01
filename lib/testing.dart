@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 //import 'package:flutter_firebase_login/sign_up/sign_up.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:formz/formz.dart';
-import 'package:shopping_list_vone/cubit/login_cubit.dart';
+import 'package:shopping_list_vone/login/cubit/login_cubit.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({Key? key}) : super(key: key);

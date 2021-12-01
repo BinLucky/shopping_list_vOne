@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shopping_list_vone/cubit/login_cubit.dart';
+import '../cubit/login_cubit.dart';
 import 'package:sign_button/sign_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
