@@ -1,3 +1,84 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formz/formz.dart';
+import 'package:shopping_list_vone/signup/bloc/cubit/sign_up_cubit.dart';
+
+class SignUpView extends StatelessWidget {
+  const SignUpView({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return BlocListener<SignUpCubit, SignUpState>(
+      listener: (context, state) {
+        if (state.status.isSubmissionSuccess) {
+          Navigator.of(context).pop();
+        }
+      },
+      child: Align(
+        alignment: Alignment(0, -1 / 3),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _EmailInput(),
+            SizedBox(height: 8),
+            _PasswordInput(),
+            SizedBox(height: 8),
+            _ConfirmPassword(),
+            SizedBox(height: 8),
+            _SignUpButton()
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _SignUpButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return ElevatedButton(
+      child: Text("Sign Up"),
+      onPressed: () {},
+    );
+  }
+}
+
+class _ConfirmPassword extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    throw UnimplementedError();
+  }
+}
+
+class _PasswordInput extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return TextFormField(
+      decoration: InputDecoration(
+          hintText: "Type your password",
+          prefixIcon: Icon(Icons.lock_outline_sharp, color: Colors.grey)),
+    );
+  }
+}
+
+class _EmailInput extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return TextFormField(
+      decoration: InputDecoration(
+          hintText: "Type your e-mail adress",
+          prefixIcon: Icon(Icons.email_outlined, color: Colors.grey)),
+      onChanged: (email) => context.read<SignUpCubit>().emailChanged(email),
+      autofocus: true,
+      keyboardType: TextInputType.emailAddress,
+    );
+  }
+}
 /*import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
