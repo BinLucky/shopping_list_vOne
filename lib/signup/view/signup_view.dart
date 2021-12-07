@@ -38,10 +38,12 @@ class _SignUpButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return ElevatedButton(
-      child: Text("Sign Up"),
-      onPressed: () {},
-    );
+    return BlocBuilder(builder: (context, state) {
+      return ElevatedButton(
+        child: Text("Sign Up"),
+        onPressed: () => context.read<SignUpCubit>().signUpFormSubmitted(),
+      );
+    });
   }
 }
 
@@ -49,7 +51,21 @@ class _ConfirmPassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    throw UnimplementedError();
+    return BlocBuilder<SignUpCubit, SignUpState>(
+        buildWhen: (previous, current) =>
+            previous.confirmedPassword != current.confirmedPassword,
+        builder: (context, state) {
+          return TextFormField(
+            onChanged: (confirmedPassword) => context
+                .read<SignUpCubit>()
+                .confirmedPasswordChanged(confirmedPassword),
+            decoration: InputDecoration(
+                hintText: "Type your password",
+                prefixIcon: Icon(Icons.lock_outline_sharp, color: Colors.grey),
+                errorText:
+                    state.password.invalid ? "Password is invalid" : null),
+          );
+        });
   }
 }
 
@@ -57,11 +73,19 @@ class _PasswordInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return TextFormField(
-      decoration: InputDecoration(
-          hintText: "Type your password",
-          prefixIcon: Icon(Icons.lock_outline_sharp, color: Colors.grey)),
-    );
+    return BlocBuilder<SignUpCubit, SignUpState>(
+        buildWhen: (previous, current) => previous.password != current.password,
+        builder: (context, state) {
+          return TextFormField(
+            onChanged: (password) =>
+                context.read<SignUpCubit>().passwordChanged(password),
+            decoration: InputDecoration(
+                hintText: "Type your password",
+                prefixIcon: Icon(Icons.lock_outline_sharp, color: Colors.grey),
+                errorText:
+                    state.password.invalid ? "Password is invalid" : null),
+          );
+        });
   }
 }
 
@@ -69,14 +93,21 @@ class _EmailInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return TextFormField(
-      decoration: InputDecoration(
-          hintText: "Type your e-mail adress",
-          prefixIcon: Icon(Icons.email_outlined, color: Colors.grey)),
-      onChanged: (email) => context.read<SignUpCubit>().emailChanged(email),
-      autofocus: true,
-      keyboardType: TextInputType.emailAddress,
-    );
+    return BlocBuilder<SignUpCubit, SignUpState>(
+        buildWhen: (previous, current) => previous.email != current.email,
+        builder: (context, state) {
+          return TextFormField(
+            key: Key("signUpForm_emailForm_key"),
+            decoration: InputDecoration(
+                hintText: "Type your e-mail adress",
+                prefixIcon: Icon(Icons.email_outlined, color: Colors.grey),
+                errorText: state.email.invalid ? "Email is Invalid" : null),
+            onChanged: (email) =>
+                context.read<SignUpCubit>().emailChanged(email),
+            autofocus: true,
+            keyboardType: TextInputType.emailAddress,
+          );
+        });
   }
 }
 /*import 'package:flutter/material.dart';
