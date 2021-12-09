@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_list_vone/signup/signup.dart';
 import '../cubit/login_cubit.dart';
 import 'package:sign_button/sign_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,11 +33,27 @@ class LoginView extends StatelessWidget {
               const SizedBox(height: 8),
               _loginInput(),
               const SizedBox(height: 8),
+              _signUpInput(),
+              const SizedBox(height: 8),
               _socialGroup()
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class _signUpInput extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return ElevatedButton(
+      onPressed: () {
+        debugPrint("Button Clicked");
+        Navigator.of(context).push(SignUp.route());
+      },
+      child: Text("SignUp"),
     );
   }
 }
