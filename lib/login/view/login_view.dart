@@ -51,7 +51,7 @@ class _signUpInput extends StatelessWidget {
     return ElevatedButton(
       onPressed: () {
         debugPrint("Button Clicked");
-        Navigator.of(context).push(SignUp.route());
+        Navigator.of(context).push<void>(SignUp.route());
       },
       child: Text("SignUp"),
     );

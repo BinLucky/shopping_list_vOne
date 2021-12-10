@@ -6,9 +6,7 @@ import 'package:authentication_repository/authentication_repository.dart';
 import 'package:shopping_list_vone/signup/view/signup_view.dart';
 
 class SignUp extends StatelessWidget {
-  SignUp({Key? key}) {
-    debugPrint("SignUpPage");
-  }
+  const SignUp({Key? key}) : super(key: key);
 
   static Route route() {
     return MaterialPageRoute<void>(builder: (_) => SignUp());
@@ -20,13 +18,10 @@ class SignUp extends StatelessWidget {
       appBar: AppBar(
         title: const Text("SignUp Form"),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(8),
-        child: BlocProvider<SignUpCubit>(
+      body: BlocProvider<SignUpCubit>(
           create: (_) => SignUpCubit(context.read<AuthenticationRepository>()),
-          child: const SignUpView(),
-        ),
-      ),
+          child: Text("TEst") // const SignUpView(),
+          ),
     );
   }
 }
