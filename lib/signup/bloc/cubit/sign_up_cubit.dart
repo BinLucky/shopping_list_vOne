@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:form_validators/form_validators.dart';
-import 'package:formz/formz.dart';
 
 part 'sign_up_state.dart';
 

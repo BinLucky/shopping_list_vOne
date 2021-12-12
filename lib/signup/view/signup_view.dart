@@ -38,12 +38,14 @@ class _SignUpButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    return BlocBuilder(builder: (context, state) {
-      return ElevatedButton(
-        child: Text("Sign Up"),
-        onPressed: () => context.read<SignUpCubit>().signUpFormSubmitted(),
-      );
-    });
+    return BlocBuilder<SignUpCubit, SignUpState>(
+        buildWhen: (previous, current) => previous.status != current.status,
+        builder: (context, state) {
+          return ElevatedButton(
+            child: Text("Sign Up"),
+            onPressed: () => context.read<SignUpCubit>().signUpFormSubmitted(),
+          );
+        });
   }
 }
 

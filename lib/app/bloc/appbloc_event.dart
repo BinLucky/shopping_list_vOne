@@ -6,7 +6,7 @@ abstract class AppblocEvent extends Equatable {}
 class LogOutRequest extends AppblocEvent {
   @override
   // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [];
 }
 
 class UserStatusChanged extends AppblocEvent {
@@ -15,5 +15,5 @@ class UserStatusChanged extends AppblocEvent {
 
   @override
   // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [user];
 }

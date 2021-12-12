@@ -19,9 +19,9 @@ class SignUp extends StatelessWidget {
         title: const Text("SignUp Form"),
       ),
       body: BlocProvider<SignUpCubit>(
-          create: (_) => SignUpCubit(context.read<AuthenticationRepository>()),
-          child: Text("TEst") // const SignUpView(),
-          ),
+        create: (_) => SignUpCubit(context.read<AuthenticationRepository>()),
+        child: const SignUpView(),
+      ),
     );
   }
 }

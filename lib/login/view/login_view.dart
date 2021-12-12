@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_list_vone/app/bloc/appbloc_bloc.dart';
+import 'package:shopping_list_vone/app/bloc/appbloc_bloc.dart';
+import 'package:shopping_list_vone/home/home.dart';
 import 'package:shopping_list_vone/signup/signup.dart';
 import '../cubit/login_cubit.dart';
 import 'package:sign_button/sign_button.dart';
@@ -116,11 +119,19 @@ class _loginInput extends StatelessWidget {
                     backgroundColor:
                         MaterialStateProperty.all(Colors.brown.shade300),
                     fixedSize: MaterialStateProperty.all(Size(250, 50))),
-                onPressed: state.status.isValidated
-                    ? () => context.read<LoginCubit>().logInWithCredentials()
-                    : null,
-              ));
+                onPressed: () {
+                  state.status.isValidated
+                      ? () => context.read<LoginCubit>().logInWithCredentials()
+                      : errorPrint();
+                      if(context.watch()<AppBloc>().state ==AppblocState.authenticated(context.read<AppBloc>().state.user)){ 
+                         Navigator.of(context).push<void>(const HomePage().);
+                      }
+                }));
   }
+}
+
+void errorPrint() {
+  debugPrint("Form is not validated");
 }
 
 class _loginWithGoogle extends StatelessWidget {

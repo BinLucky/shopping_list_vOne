@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 class User extends Equatable {
   @override
   // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [name, id, email];
 
   const User({required this.id, this.email, this.name});
   final String? name;
