@@ -123,9 +123,16 @@ class _loginInput extends StatelessWidget {
                   state.status.isValidated
                       ? () => context.read<LoginCubit>().logInWithCredentials()
                       : errorPrint();
-                      if(context.watch()<AppBloc>().state ==AppblocState.authenticated(context.read<AppBloc>().state.user)){ 
-                         Navigator.of(context).push<void>(const HomePage().);
-                      }
+                  debugPrint(
+                      context.read<LoginCubit>().state.status.toString());
+                  // if () {
+                  debugPrint("User is Authenticated");
+                  // Navigator.of(context).push<void>(
+                  //    MaterialPageRoute(builder: (context) => HomePage()));
+                  //    context.watch()<AppBloc>().state ==
+                  //  AppblocState.authenticated(
+                  //    context.read<AppBloc>().state.user)
+                  // }
                 }));
   }
 }

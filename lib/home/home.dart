@@ -7,7 +7,8 @@ import 'package:shopping_list_vone/login/login_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
-  static Route route() =>  MaterialPageRoute<void>(builder:(_)=> HomePage());
+
+  static Page page() => const MaterialPage<void>(child: HomePage());
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
