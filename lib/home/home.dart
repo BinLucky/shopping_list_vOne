@@ -35,11 +35,24 @@ class HomePage extends StatelessWidget {
                   onPressed: () {
                     context.read<AppBloc>().add(LogOutRequest());
                   },
-                  child: Text("LogOut"))
+                  child: Text("LogOut")),
+              _TestButton()
             ]),
           ),
         ),
       ),
     );
+  }
+}
+
+class _TestButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return ElevatedButton(
+        onPressed: () {
+          debugPrint(context.read<AppBloc>().state.appStatus.toString());
+        },
+        child: Text("Test Button"));
   }
 }

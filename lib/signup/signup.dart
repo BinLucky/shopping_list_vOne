@@ -8,8 +8,12 @@ import 'package:shopping_list_vone/signup/view/signup_view.dart';
 class SignUp extends StatelessWidget {
   const SignUp({Key? key}) : super(key: key);
 
+  static Page page() {
+    return const MaterialPage<void>(child: SignUp());
+  }
+
   static Route route() {
-    return MaterialPageRoute<void>(builder: (_) => SignUp());
+    return MaterialPageRoute(builder: (context) => SignUp());
   }
 
   @override

@@ -38,12 +38,35 @@ class LoginView extends StatelessWidget {
               const SizedBox(height: 8),
               _signUpInput(),
               const SizedBox(height: 8),
-              _socialGroup()
+              _socialGroup(),
+              const SizedBox(
+                height: 8,
+              ),
+              _TestButton(),
+              ElevatedButton(
+                onPressed: () {
+                  debugPrint("Button Clicked");
+                  Navigator.of(context).push(SignUp.route());
+                },
+                child: Text("SignUp"),
+              )
             ],
           ),
         ),
       ),
     );
+  }
+}
+
+class _TestButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return ElevatedButton(
+        onPressed: () {
+          debugPrint(context.read<AppBloc>().state.appStatus.toString());
+        },
+        child: Text("Test Button"));
   }
 }
 
@@ -54,7 +77,8 @@ class _signUpInput extends StatelessWidget {
     return ElevatedButton(
       onPressed: () {
         debugPrint("Button Clicked");
-        Navigator.of(context).push<void>(SignUp.route());
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => const SignUp()));
       },
       child: Text("SignUp"),
     );
@@ -121,12 +145,12 @@ class _loginInput extends StatelessWidget {
                     fixedSize: MaterialStateProperty.all(Size(250, 50))),
                 onPressed: () {
                   state.status.isValidated
-                      ? () => context.read<LoginCubit>().logInWithCredentials()
-                      : errorPrint();
-                  debugPrint(
-                      context.read<LoginCubit>().state.status.toString());
+                      ? errorPrint()
+                      : () => context.read<LoginCubit>().logInWithCredentials();
+                  // debugPrint(
+                  //  context.read<LoginCubit>().state.status.toString());
                   // if () {
-                  debugPrint("User is Authenticated");
+                  //debugPrint("User is Authenticated");
                   // Navigator.of(context).push<void>(
                   //    MaterialPageRoute(builder: (context) => HomePage()));
                   //    context.watch()<AppBloc>().state ==
