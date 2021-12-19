@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:equatable/equatable.dart';
@@ -24,13 +25,16 @@ class LoginCubit extends Cubit<LoginState> {
   }
 
   Future<void> logInWithCredentials() async {
+    debugPrint("Test Stage LoginWith Credentials");
     if (!state.status.isValidated) {
       emit(state.copyWith(status: FormzStatus.submissionInProgress));
       try {
         await _authenticationRepository.logInWithEmailAndPassword(
             email: state.email.value, password: state.password.value);
         emit(state.copyWith(status: FormzStatus.submissionSuccess));
-      } catch (_) {}
+      } catch (_) {
+        debugPrint(_.toString());
+      }
     }
   }
 

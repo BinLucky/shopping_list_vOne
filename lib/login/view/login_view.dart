@@ -144,6 +144,7 @@ class _loginInput extends StatelessWidget {
                         MaterialStateProperty.all(Colors.brown.shade300),
                     fixedSize: MaterialStateProperty.all(Size(250, 50))),
                 onPressed: () {
+                  debugPrint("Login Button Clicked");
                   state.status.isValidated
                       ? errorPrint()
                       : () => context.read<LoginCubit>().logInWithCredentials();
