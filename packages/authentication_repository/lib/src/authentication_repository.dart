@@ -66,11 +66,14 @@ class AuthenticationRepository {
     } catch (_) {}
   }
 
-  Future<void> logInWithEmailAndPassword(
+  Future<User?> logInWithEmailAndPassword(
       {required String email, required String password}) async {
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(
+      var credentials = await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
+      debugPrint(credentials.user!.email.toString());
+
+      return credentials.user!.toUser;
     } catch (_) {}
   }
 }

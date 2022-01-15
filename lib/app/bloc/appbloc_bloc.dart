@@ -1,7 +1,5 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
-
 import 'package:meta/meta.dart';
 import 'package:authentication_repository/authentication_repository.dart';
 import 'package:equatable/equatable.dart';
@@ -25,6 +23,7 @@ class AppBloc extends Bloc<AppblocEvent, AppblocState> {
 
   void _logOutRequest(LogOutRequest event, Emitter<AppblocState> emit) {
     unawaited(_authenticationRepository.logOut());
+    emit(AppblocState.unauthenticated());
   }
 
   void _userStatusChanged(UserStatusChanged event, Emitter<AppblocState> emit) {

@@ -14,22 +14,24 @@ class SignUpView extends StatelessWidget {
         if (state.status.isSubmissionSuccess) {
           Navigator.of(context).pop();
         } else {
-          debugPrint("Hata");
+          debugPrint("Hata - Status Is Not SubmissionSuccess");
         }
       },
       child: Align(
-        alignment: Alignment(0, -1 / 3),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _EmailInput(),
-            SizedBox(height: 8),
-            _PasswordInput(),
-            SizedBox(height: 8),
-            _ConfirmPassword(),
-            SizedBox(height: 8),
-            _SignUpButton()
-          ],
+        alignment: const Alignment(0, -1 / 3),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              _EmailInput(),
+              SizedBox(height: 8),
+              _PasswordInput(),
+              SizedBox(height: 8),
+              _ConfirmPassword(),
+              SizedBox(height: 8),
+              _SignUpButton()
+            ],
+          ),
         ),
       ),
     );
@@ -42,6 +44,9 @@ class _SignUpButton extends StatelessWidget {
     // TODO: implement build
     return BlocBuilder<SignUpCubit, SignUpState>(builder: (context, state) {
       return ElevatedButton(
+        style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(Colors.brown.shade300),
+            fixedSize: MaterialStateProperty.all(Size(250, 50))),
         child: Text("Sign Up"),
         onPressed: () => context.read<SignUpCubit>().signUpFormSubmitted(),
       );

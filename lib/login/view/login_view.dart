@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_list_vone/app/bloc/appbloc_bloc.dart';
-import 'package:shopping_list_vone/app/bloc/appbloc_bloc.dart';
-import 'package:shopping_list_vone/home/home.dart';
 import 'package:shopping_list_vone/signup/signup.dart';
 import '../cubit/login_cubit.dart';
 import 'package:sign_button/sign_button.dart';
@@ -42,14 +40,6 @@ class LoginView extends StatelessWidget {
               const SizedBox(
                 height: 8,
               ),
-              _TestButton(),
-              ElevatedButton(
-                onPressed: () {
-                  debugPrint("Button Clicked");
-                  Navigator.of(context).push(SignUp.route());
-                },
-                child: Text("SignUp"),
-              )
             ],
           ),
         ),
@@ -58,23 +48,14 @@ class LoginView extends StatelessWidget {
   }
 }
 
-class _TestButton extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return ElevatedButton(
-        onPressed: () {
-          debugPrint(context.read<AppBloc>().state.appStatus.toString());
-        },
-        child: Text("Test Button"));
-  }
-}
-
 class _signUpInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     return ElevatedButton(
+      style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(Colors.brown.shade300),
+          fixedSize: MaterialStateProperty.all(Size(250, 50))),
       onPressed: () {
         debugPrint("Button Clicked");
         Navigator.push(
@@ -107,6 +88,7 @@ class _emailInput extends StatelessWidget {
               hintStyle: TextStyle(height: 1.5),
               prefixIcon: Icon(Icons.person, color: Colors.grey)),
           autofocus: true,
+          onChanged: (email) => context.read<LoginCubit>().emailChanged(email),
         );
       },
     );
@@ -116,23 +98,26 @@ class _emailInput extends StatelessWidget {
 class _passwordInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return TextFormField(
-      decoration: const InputDecoration(
-        labelText: "User password",
-        hintText: "Type your password",
-        hintStyle: TextStyle(height: 1.5),
-        prefixIcon: Icon(Icons.lock, color: Colors.grey),
-      ),
-      //validator: passwordValidator,
-    );
+    return BlocBuilder<LoginCubit, LoginState>(
+        buildWhen: (previous, current) => previous.password != current.password,
+        builder: (context, state) {
+          return TextFormField(
+            decoration: const InputDecoration(
+              labelText: "User password",
+              hintText: "Type your password",
+              hintStyle: TextStyle(height: 1.5),
+              prefixIcon: Icon(Icons.lock, color: Colors.grey),
+            ),
+            onChanged: (password) =>
+                context.read<LoginCubit>().passwordChanged(password),
+          );
+        });
   }
 }
 
 class _loginInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return BlocBuilder<LoginCubit, LoginState>(
         buildWhen: (previus, current) => previus != current,
         builder: (context, state) => state.status.isSubmissionInProgress
@@ -144,121 +129,37 @@ class _loginInput extends StatelessWidget {
                         MaterialStateProperty.all(Colors.brown.shade300),
                     fixedSize: MaterialStateProperty.all(Size(250, 50))),
                 onPressed: () {
-                  debugPrint("Login Button Clicked");
-                  state.status.isValidated
-                      ? errorPrint()
-                      : () => context.read<LoginCubit>().logInWithCredentials();
-                  // debugPrint(
-                  //  context.read<LoginCubit>().state.status.toString());
-                  // if () {
-                  //debugPrint("User is Authenticated");
-                  // Navigator.of(context).push<void>(
-                  //    MaterialPageRoute(builder: (context) => HomePage()));
-                  //    context.watch()<AppBloc>().state ==
-                  //  AppblocState.authenticated(
-                  //    context.read<AppBloc>().state.user)
-                  // }
+                  if (state.status.isValidated) {
+                    context
+                        .read<LoginCubit>()
+                        .logInWithCredentials()
+                        .then((value) {
+                      if (value != null) {
+                        debugPrint(context
+                                .read<LoginCubit>()
+                                .getLoggedUser()
+                                .email
+                                .toString() +
+                            " Cachelenen User");
+                        context.read<AppBloc>().add(UserStatusChanged(value));
+                      } else {
+                        debugPrint("Current user is null");
+                      }
+                    });
+                  } else {
+                    //errorPrint()
+                    debugPrint("Fuck1");
+                  }
                 }));
   }
-}
-
-void errorPrint() {
-  debugPrint("Form is not validated");
 }
 
 class _loginWithGoogle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return SignInButton.mini(
       buttonType: ButtonType.google,
       onPressed: () => context.read<LoginCubit>().logInWithGoogle(),
     );
   }
 }
-/*
-ListView(children: [
-          const SizedBox(
-            height: 60,
-          ),
-          Container(
-            child: const Text(
-              "Login",
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.black, fontSize: 32),
-            ),
-          ),
-          Form(
-            key: _formKey,
-            child: SingleChildScrollView(
-              child: Container(
-                margin: EdgeInsets.all(25),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    TextFormField(
-                      decoration: const InputDecoration(
-                          labelText: "User mail",
-                          hintText: "Type your e-mail adress",
-                          hintStyle: TextStyle(height: 1.5),
-                          prefixIcon: Icon(Icons.person, color: Colors.grey)),
-                      autofocus: true,
-                      //validator: mailValidator,
-                    ),
-                    const SizedBox(
-                      height: 5,
-                    ),
-                    TextFormField(
-                      decoration: const InputDecoration(
-                        labelText: "User password",
-                        hintText: "Type your password",
-                        hintStyle: TextStyle(height: 1.5),
-                        prefixIcon: Icon(Icons.lock, color: Colors.grey),
-                      ),
-                      //validator: passwordValidator,
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-          Container(
-            child: Center(
-              child: ElevatedButton(
-                child: Text("Login"),
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(Colors.brown.shade300),
-                    fixedSize: MaterialStateProperty.all(Size(250, 50))),
-                onPressed: () {
-                  _formKey.currentState!.validate();
-                },
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 75,
-          ),
-          Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SignInButton.mini(
-                  buttonType: ButtonType.google,
-                  onPressed: () {},
-                ),
-                SignInButton.mini(
-                  buttonType: ButtonType.apple,
-                  onPressed: () {},
-                ),
-                SignInButton.mini(
-                  buttonType: ButtonType.twitter,
-                  onPressed: () {},
-                ),
-                SignInButton.mini(
-                    buttonType: ButtonType.facebook, onPressed: () {})
-              ],
-            ),
-          )
-        ]),
-*/ 
